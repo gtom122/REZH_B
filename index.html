@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Termékrendelés</title>
+  <style>
+    body {
+      background-color: rgb(228, 185, 91);
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      margin-top: 5px;
+      padding: 5px;
+      width: 200px;
+    }
+    .error {
+      background-color: #f99;
+    }
+    .form-box {
+      display: flex;
+      gap: 20px;
+    }
+    img {
+      width: 250px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div><strong>Név: Gellén Tamás | Neptun: FH4U3E</strong></div>
+    <h2>Termékrendelés</h2>
+    <h3>Termék - Laptop-01</h3>
+    <form id="orderForm" action="feldolgoz.php" method="POST" onsubmit="return validateForm();">
+      <div class="form-box">
+        <div>
+          <label for="nev">Név:</label>
+          <input type="text" id="nev" name="nev" required minlength="8" maxlength="30">
+
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="darab">Darab:</label>
+          <input type="number" id="darab" name="darab" required min="1" max="10">
+
+          <label for="nap">Nap:</label>
+          <select id="nap" name="nap" required>
+            <option value="">Válasszon!</option>
+            <option value="hétfő">hétfő</option>
+            <option value="kedd">kedd</option>
+            <option value="szerda">szerda</option>
+            <option value="csütörtök">csütörtök</option>
+            <option value="péntek">péntek</option>
+          </select><br><br>
+
+          <button type="submit">Küldés</button>
+        </div>
+        <div>
+          <img src="img/kep.jpg" alt="Laptop">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+      document.getElementById("rendelesForm").addEventListener("submit", function(e) {
+      var checkPattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+      let hibas = false;
+
+      // Mezők
+      let nev = document.getElementById("nev");
+      let email = document.getElementById("email");
+      let darab = document.getElementById("darab");
+      let nap = document.getElementById("nap");
+
+      // Alaphelyzetbe állítás
+      [nev, email, darab, nap].forEach(el => el.classList.remove("hiba"));
+
+      // Validáció
+      if (nev.value.length < 8 || nev.value.length > 30) {
+        nev.classList.add("hiba");
+        hibas = true;
+      }
+
+      if (!checkPattern.test(email.value)) {
+        email.classList.add("hiba");
+        hibas = true;
+      }
+
+      let darabSzam = parseInt(darab.value);
+      if (isNaN(darabSzam) || darabSzam < 1 || darabSzam > 10) {
+        darab.classList.add("hiba");
+        hibas = true;
+      }
+
+      if (!["hétfő", "kedd", "szerda", "csütörtök", "péntek"].includes(nap.value)) {
+        nap.classList.add("hiba");
+        hibas = true;
+      }
+
+      if (hibas) {
+        e.preventDefault(); 
+      }
+    });
+  </script>
+</body>
+</html>
