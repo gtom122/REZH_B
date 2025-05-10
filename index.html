@@ -3,30 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Termékrendelés</title>
-  <style>
+  <style> 
     body {
       background-color: rgb(228, 185, 91);
       font-family: Arial, sans-serif;
     }
+
     .container {
       padding: 20px;
     }
+
     label {
-      display: block;
-      margin-top: 10px;
+      display: inline-block;
+      width: 80px;
     }
+
     input, select {
       margin-top: 5px;
       padding: 5px;
       width: 200px;
     }
+
     .error {
       background-color: #f99;
     }
+
     .form-box {
       display: flex;
       gap: 20px;
     }
+
     img {
       width: 250px;
     }
@@ -41,13 +47,13 @@
       <div class="form-box">
         <div>
           <label for="nev">Név:</label>
-          <input type="text" id="nev" name="nev" required minlength="8" maxlength="30">
+          <input type="text" id="nev" name="nev" required minlength="8" maxlength="30"><br><br>
 
           <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="email" required><br><br>
 
           <label for="darab">Darab:</label>
-          <input type="number" id="darab" name="darab" required min="1" max="10">
+          <input type="number" id="darab" name="darab" required min="1" max="10"><br><br>
 
           <label for="nap">Nap:</label>
           <select id="nap" name="nap" required>
